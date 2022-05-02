@@ -11,6 +11,7 @@ import {
   of,
   scan,
   startWith,
+  Subject,
   switchMap,
   takeWhile,
   tap,
@@ -45,7 +46,7 @@ export class MovieService {
 
   streamMovies(): Observable<Movie[]> {
     const withError = this.withError;
-    return from(movies).pipe(
+    return from([...movies].slice(0, 4)).pipe(
       concatMap(movie => timer(1000).pipe(map(() => movie))),
       scan((movies, movie) => [movie, ...movies], [] as Movie[]),
       o$ => {
@@ -63,20 +64,28 @@ export class MovieService {
     );
   }
 
-  searchMovies(searchTerm$: Observable<string>): Observable<Movie[]> {
-    return searchTerm$.pipe(
-      startWith(''),
-      switchMap(term =>
-        this.getMovies().pipe(
-          map(movies =>
-            term
-              ? movies.filter(m =>
-                  m.title.toLowerCase().includes(term.toLowerCase())
-                )
-              : movies
-          )
-        )
-      )
+  searchMovies(term: string): Observable<Movie[]> {
+    const withError = this.withError;
+    return timer(1250).pipe(
+      map(() =>
+        term
+          ? [...movies].filter(m =>
+              m.title.toLowerCase().includes(term.toLowerCase())
+            )
+          : [...movies]
+      ),
+      o$ => {
+        if (withError) {
+          return o$.pipe(
+            switchMap(() =>
+              throwError(
+                () => new Error('thrown from MovieService#searchMovies')
+              )
+            )
+          );
+        }
+        return o$;
+      }
     );
   }
 }

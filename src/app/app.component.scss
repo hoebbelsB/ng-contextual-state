@@ -103,7 +103,6 @@
 
 .complete {
   position: absolute;
-  top: -60px;
   left: .5rem;
   color: forestgreen;
   border-color: darken(forestgreen, 15%);
@@ -130,6 +129,11 @@
   margin-top: 100px;
   position: relative;
   contain: layout;
+  min-height: 100vh;
+
+  .complete {
+    top: -60px;
+  }
 
   @media only screen and (max-width: 600px) {
     grid-template-columns: repeat(auto-fit, minmax(10rem, 23rem));

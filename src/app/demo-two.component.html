@@ -1,0 +1,62 @@
+<div class="demo-panel">
+  <div class="panel-group">
+    <h3>State</h3>
+    <div class="btn-group">
+      <button class="btn" (click)="reset()">↻ reset</button>
+      <button class="btn" (click)="showError()">x error</button>
+<!--      <button class="btn" (click)="stop()">✓ complete</button>-->
+    </div>
+  </div>
+</div>
+<h2>Multi Shot</h2>
+
+<!-- error template -->
+<ng-template #error>
+  <div class="error context">
+    <img width="32" height="32" src="/assets/sad.svg" alt="" /><strong
+  >We experienced an error</strong
+  >
+  </div>
+</ng-template>
+
+<!-- suspense template -->
+<ng-template #loader>
+  <div class="loader"></div>
+</ng-template>
+
+<!-- complete template -->
+<ng-template #complete>
+  <div class="complete context">stream completed ✓</div>
+</ng-template>
+
+<!-- rxLet w/ context variables -->
+<!--<div
+  class="movie-list"
+  *rxLet="
+    state$;
+    let c = $complete;
+    let movies;
+    rxSuspense: loader;
+    rxError: error;
+  "
+>
+  <ng-container *ngIf="c; then complete"></ng-container>
+
+  <movie-card *ngFor="let movie of movies" [movie]="movie">
+  </movie-card>
+</div>-->
+
+<!-- async -->
+<div
+  class="movie-list"
+  *ngIf="
+    state$ | async as state;
+    else: loader
+  "
+>
+  <ng-container *ngIf="state.error; then: error"></ng-container>
+<!--  <ng-container *ngIf="state.complete; then: complete"></ng-container>-->
+  <movie-card *ngFor="let movie of state.movies" [movie]="movie">
+  </movie-card>
+</div>
+

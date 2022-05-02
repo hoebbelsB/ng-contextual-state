@@ -1,14 +1,46 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { LetModule } from '@rx-angular/template/let';
+import { RouterModule } from '@angular/router';
+import { LetModule } from './let/let.module';
 
 import { AppComponent } from './app.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
 import { StarRatingModule } from './star-rating/star-rating.module';
+import { DemoOneComponent } from './demo-one.component';
+import { DemoTwoComponent } from './demo-two.component';
+import { DemoThreeComponent } from './demo-three.component';
 
 @NgModule({
-  declarations: [AppComponent, MovieCardComponent],
-  imports: [BrowserModule, StarRatingModule, LetModule],
+  declarations: [
+    AppComponent,
+    MovieCardComponent,
+    DemoOneComponent,
+    DemoTwoComponent,
+    DemoThreeComponent,
+  ],
+  imports: [
+    BrowserModule,
+    StarRatingModule,
+    LetModule,
+    RouterModule.forRoot([
+      {
+        path: 'demo1',
+        component: DemoOneComponent,
+      },
+      {
+        path: 'demo2',
+        component: DemoTwoComponent,
+      },
+      {
+        path: 'demo3',
+        component: DemoThreeComponent,
+      },
+      /*{
+        path: '',
+        redirectTo: 'demo1',
+      },*/
+    ]),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
