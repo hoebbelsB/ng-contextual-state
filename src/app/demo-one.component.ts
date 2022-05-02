@@ -18,9 +18,6 @@ import { MovieService } from './movie.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DemoOneComponent {
-  private searchTerm$ = new BehaviorSubject<string>('');
-  private stop$ = new Subject<void>();
-
   /** state creation functions **/
 
   /** stage 1: single-shot **/
@@ -42,10 +39,6 @@ export class DemoOneComponent {
   constructor(private readonly movieService: MovieService) {}
 
   /** methods to implement **/
-
-  stop() {
-    this.stop$.next();
-  }
 
   /** demo ui bindings **/
 
