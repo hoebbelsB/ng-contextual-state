@@ -29,14 +29,11 @@
   class="movie-list"
   *rxLet="
     state$;
-    let c = $complete;
     let movies;
     rxSuspense: loader;
     rxError: error;
   "
 >
-  <ng-container *ngIf="c; then complete"></ng-container>
-
   <movie-card *ngFor="let movie of movies" [movie]="movie">
   </movie-card>
 </div>
