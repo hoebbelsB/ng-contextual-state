@@ -3,6 +3,7 @@ import { setTimeout } from '@rx-angular/cdk/zone-less/browser';
 import {
   BehaviorSubject,
   catchError,
+  endWith,
   map,
   materialize,
   of,
@@ -21,36 +22,17 @@ import { MovieService } from './movie.service';
 export class DemoTwoComponent {
   /** state creation functions **/
 
-  /** async start **/
+  /** async **/
   createState = () =>
     this.movieService.streamMovies().pipe(
       map(movies => ({
         movies: [...movies],
       })),
       catchError(() => of({ error: true }))
+      /*endWith({
+        complete: true,
+      })*/
     );
-
-  /** async final **/
-  /*createState = () =>
-    this.movieService.streamMovies().pipe(
-      map(movies => ({
-        movies,
-      })),
-      catchError(() =>
-        of({
-          error: true,
-        })
-      ),
-      materialize(),
-      map(({ kind, value }) => {
-        if (kind === 'C') {
-          return {
-            complete: true,
-          };
-        }
-        return value;
-      })
-    );*/
 
   /** rxlet **/
   // createState = () => this.movieService.streamMovies();

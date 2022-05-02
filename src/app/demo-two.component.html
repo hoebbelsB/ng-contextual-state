@@ -34,13 +34,13 @@
   class="movie-list"
   *rxLet="
     state$;
-    let c = $complete;
     let movies;
     rxSuspense: loader;
     rxError: error;
+    let c = $complete;
   "
 >
-  <ng-container *ngIf="c; then complete"></ng-container>
+&lt;!&ndash;  <ng-container *ngIf="c; then: complete"></ng-container>&ndash;&gt;
 
   <movie-card *ngFor="let movie of movies" [movie]="movie">
   </movie-card>

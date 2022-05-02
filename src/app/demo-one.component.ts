@@ -20,11 +20,11 @@ import { MovieService } from './movie.service';
 export class DemoOneComponent {
   /** state creation functions **/
 
-  /** stage 1: single-shot **/
+  /** async start **/
   // Observable | Promise
   createState = () => this.movieService.getMovies();
 
-  /** stage 1: final async **/
+  /** final async **/
   /*createState = () =>
     this.movieService.getMovies().pipe(
       map(movies => ({
