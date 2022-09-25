@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { LetModule } from './let/let.module';
+import { LetModule } from '@rx-angular/template/let';
 
 import { AppComponent } from './app.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';

@@ -29,8 +29,8 @@
   *rxLet="
     state$;
     let movies;
-    rxSuspense: loader;
-    rxError: error;
+    suspense: loader;
+    error: error;
   "
 >
   <movie-card *ngFor="let movie of movies" [movie]="movie">
