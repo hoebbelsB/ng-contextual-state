@@ -67,13 +67,16 @@ export class MovieService {
   searchMovies(term: string): Observable<Movie[]> {
     const withError = this.withError;
     return timer(1250).pipe(
-      map(() =>
-        term
+      map(() => {
+        if (term === 'error') {
+          throw new Error('searched for error');
+        }
+        return term
           ? [...movies].filter(m =>
               m.title.toLowerCase().includes(term.toLowerCase())
             )
-          : [...movies]
-      ),
+          : [...movies];
+      }),
       o$ => {
         if (withError) {
           return o$.pipe(

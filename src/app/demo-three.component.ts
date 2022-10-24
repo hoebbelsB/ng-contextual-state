@@ -2,11 +2,12 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { setTimeout } from '@rx-angular/cdk/zone-less/browser';
 import {
   BehaviorSubject,
+  catchError,
   map,
+  of,
   startWith,
   Subject,
   switchMap,
-  takeUntil,
 } from 'rxjs';
 import { Movie } from './movie';
 import { MovieService } from './movie.service';
@@ -40,8 +41,11 @@ export class DemoThreeComponent {
             movieCache = movies;
             return { movies };
           }),
+          catchError(e =>
+            of({ loading: false, movies: movieCache, error: true })
+          ),
           /!** when we start the search, emit loading true + cached movies **!/
-          startWith({ loading: true, movies: movieCache })
+          startWith({ loading: true, movies: movieCache, error: false })
         );
       })
     );

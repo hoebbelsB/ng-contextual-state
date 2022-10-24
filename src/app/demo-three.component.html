@@ -75,17 +75,21 @@
 </div>-->
 
 <!-- stage 3: async final -->
-<!--<div class="movie-list" *ngIf="state$ | async as state">
+<!--<div class="movie-list"-->
+<!--     *ngIf="state$ | async as state">-->
 
-  <ng-container *ngIf="state.loading; then: loader"></ng-container>
+<!--  <ng-container-->
+<!--    *ngIf="state.loading; then: loader"></ng-container>-->
+<!--  <ng-container-->
+<!--    *ngIf="state.error; then: error"></ng-container>-->
 
-  <movie-card
-    *ngFor="let movie of state.movies"
-    [movie]="movie"
-  >
-  </movie-card>
+<!--  <movie-card-->
+<!--    *ngFor="let movie of state.movies"-->
+<!--    [movie]="movie"-->
+<!--  >-->
+<!--  </movie-card>-->
 
-</div>-->
+<!--</div>-->
 
 <!-- async start -->
 <div
