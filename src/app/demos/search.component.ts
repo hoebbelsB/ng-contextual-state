@@ -23,7 +23,9 @@ import { MovieService } from '../movie.service';
   styles: [
     `
       :host {
-        display: contents;
+        display: block;
+        min-height: 100vh;
+        position: relative;
       }
     `,
   ],
@@ -50,20 +52,20 @@ export class SearchComponent {
   /** async final **/
   /*createState = () => {
     // introduce movie cache to not lose data when searching
-    let movieCache: Movie[] = [];
+    let cache: Movie[] = [];
     return this.searchTerm$.pipe(
       switchMap(term => {
         return this.movieService.searchMovies(term).pipe(
           map(movies => {
             // cache latest movie values when
-            movieCache = movies;
+            cache = movies;
             return { movies };
           }),
           catchError(e =>
-            of({ loading: false, movies: movieCache, error: true })
+            of({ movies: cache, error: true })
           ),
           /!** when we start the search, emit loading true + cached movies **!/
-          startWith({ loading: true, movies: movieCache, error: false })
+          startWith({ loading: true, movies: cache })
         );
       })
     );

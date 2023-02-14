@@ -57,7 +57,7 @@
     state$;
     let state;
     let c = complete;
-    let s = suspense;
+    suspense: loader;
     error: error;
     nextTrigger: nextTrigger$;
     completeTrigger: completeTrigger$;
@@ -67,7 +67,6 @@
 >
 
   <ng-container *ngIf="c; then: complete"></ng-container>
-  <ng-container *ngIf="s; then: loader"></ng-container>
 
   <movie-card *ngFor="let movie of state" [movie]="movie"> </movie-card>
 </div>

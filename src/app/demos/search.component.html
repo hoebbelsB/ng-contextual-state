@@ -4,11 +4,10 @@
     <div class="btn-group">
       <button class="btn" (click)="reset()">↻ reset</button>
       <button class="btn" (click)="showError()">x error</button>
-<!--      <button class="btn" (click)="stop()">✓ complete</button>-->
     </div>
   </div>
 </div>
-<h2>Multi Shot with template triggers</h2>
+<h2>Search with intermediate suspense</h2>
 <div class="search-bar">
   <button
     type="submit"
@@ -35,35 +34,8 @@
 
 <!-- suspense template -->
 <ng-template #loader>
-  <movie-list-skeleton [amount]="4"></movie-list-skeleton>
+  <div class="loader"></div>
 </ng-template>
-
-<!-- complete template -->
-<ng-template #complete>
-  <div class="complete context">stream completed ✓</div>
-</ng-template>
-
-<!-- stage 4: rxLet with all triggers -->
-<!--<div
-  class="movie-list"
-  *rxLet="
-    state$;
-    let state;
-    let c = complete;
-    let s = suspense;
-    error: error;
-    nextTrg: nextTrigger$;
-    completeTrg: completeTrigger$;
-    errorTrg: errorTrigger$;
-    suspenseTrg: suspenseTrigger$;
-  "
->
-
-  <ng-container *ngIf="c; then: complete"></ng-container>
-  <ng-container *ngIf="s; then: loader"></ng-container>
-
-  <movie-card *ngFor="let movie of state" [movie]="movie"> </movie-card>
-</div>-->
 
 <!-- stage 3: rxLet final -->
 <!--<div
@@ -71,22 +43,19 @@
   *rxLet="
     state$;
     let state;
-    let c = complete;
     let s = suspense;
     error: error;
     suspenseTrigger: suspenseTrigger$;
   "
 >
-
-  <ng-container *ngIf="c; then: complete"></ng-container>
   <ng-container *ngIf="s; then: loader"></ng-container>
 
   <movie-card *ngFor="let movie of state" [movie]="movie"> </movie-card>
 </div>-->
 
-<!-- stage 3: async final -->
+<!-- stage 2: async final -->
 <!--<div class="movie-list"
-     *ngIf="state$ | async as state">
+     *ngIf="state$ | async as state;">
 
   <ng-container
     *ngIf="state.loading; then: loader"></ng-container>
