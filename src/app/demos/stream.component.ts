@@ -11,15 +11,21 @@ import {
   switchMap,
   takeUntil,
 } from 'rxjs';
-import { MovieService } from './movie.service';
+import { MovieService } from '../movie.service';
 
 @Component({
-  selector: 'app-demo-two',
-  templateUrl: './demo-two.component.html',
-  styleUrls: ['./demo-two.component.scss'],
+  selector: 'stream',
+  templateUrl: './stream.component.html',
+  styles: [
+    `
+      :host {
+        display: contents;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DemoTwoComponent {
+export class StreamComponent {
   /** state creation functions **/
 
   /** async **/

@@ -1,47 +1,50 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
+import { provideRouter, RouterModule } from '@angular/router';
 import { LetModule } from '@rx-angular/template/let';
 
 import { AppComponent } from './app.component';
+import { ContextTriggerComponent } from './demos/context-trigger.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
 import { StarRatingModule } from './star-rating/star-rating.module';
-import { DemoOneComponent } from './demo-one.component';
-import { DemoTwoComponent } from './demo-two.component';
-import { DemoThreeComponent } from './demo-three.component';
+import { SingleShotComponent } from './demos/single-shot.component';
+import { StreamComponent } from './demos/stream.component';
+import { SearchComponent } from './demos/search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MovieCardComponent,
-    DemoOneComponent,
-    DemoTwoComponent,
-    DemoThreeComponent,
+    SingleShotComponent,
+    StreamComponent,
+    SearchComponent,
+    ContextTriggerComponent,
   ],
-  imports: [
-    BrowserModule,
-    StarRatingModule,
-    LetModule,
-    RouterModule.forRoot([
+  imports: [BrowserModule, StarRatingModule, LetModule, RouterModule],
+  providers: [
+    provideRouter([
       {
-        path: 'demo1',
-        component: DemoOneComponent,
+        path: 'single-shot',
+        component: SingleShotComponent,
       },
       {
-        path: 'demo2',
-        component: DemoTwoComponent,
+        path: 'stream',
+        component: StreamComponent,
       },
       {
-        path: 'demo3',
-        component: DemoThreeComponent,
+        path: 'search',
+        component: SearchComponent,
       },
-      /*{
-        path: '',
-        redirectTo: 'demo1',
-      },*/
+      {
+        path: 'context-trigger',
+        component: ContextTriggerComponent,
+      },
+      {
+        path: '**',
+        redirectTo: 'single-shot',
+      },
     ]),
   ],
-  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

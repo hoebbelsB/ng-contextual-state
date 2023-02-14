@@ -1,0 +1,73 @@
+<div class="demo-panel">
+  <div class="panel-group">
+    <h3>State</h3>
+    <div class="btn-group">
+      <button class="btn" (click)="reset()">↻ reset</button>
+      <button class="btn" (click)="showError()">x error</button>
+    </div>
+  </div>
+  <div class="panel-group">
+    <h3>Triggers</h3>
+    <div class="btn-group">
+      <button class="btn" (click)="triggerSuspense()">↻ suspense</button>
+      <button class="btn" (click)="triggerError()">x error</button>
+      <button class="btn" (click)="triggerComplete()">✓ complete</button>
+      <button class="btn" (click)="triggerNext()">next</button>
+    </div>
+  </div>
+</div>
+<h2>Context Trigger Demo</h2>
+<div class="search-bar">
+  <button
+    type="submit"
+    class="magnifier-button"
+    aria-label="Search for a movie"
+  >
+    <img src="/assets/search.svg" width="20" height="20" />
+  </button>
+  <input
+    #searchInput
+    class="search-input"
+    placeholder="Search"
+    (input)="search(searchInput.value)"
+  />
+</div>
+<!-- error template -->
+<ng-template #error>
+  <div class="error context">
+    <img width="32" height="32" src="/assets/sad.svg" alt="" /><strong
+  >We experienced an error</strong
+  >
+  </div>
+</ng-template>
+
+<!-- suspense template -->
+<ng-template #loader>
+  <div class="loader"></div>
+</ng-template>
+
+<!-- complete template -->
+<ng-template #complete>
+  <div class="complete context">stream completed ✓</div>
+</ng-template>
+
+<div
+  class="movie-list"
+  *rxLet="
+    state$;
+    let state;
+    let c = complete;
+    let s = suspense;
+    error: error;
+    nextTrigger: nextTrigger$;
+    completeTrigger: completeTrigger$;
+    errorTrigger: errorTrigger$;
+    suspenseTrigger: suspenseTrigger$;
+  "
+>
+
+  <ng-container *ngIf="c; then: complete"></ng-container>
+  <ng-container *ngIf="s; then: loader"></ng-container>
+
+  <movie-card *ngFor="let movie of state" [movie]="movie"> </movie-card>
+</div>

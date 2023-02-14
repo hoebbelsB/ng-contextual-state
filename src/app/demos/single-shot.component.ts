@@ -9,15 +9,21 @@ import {
   switchMap,
   takeUntil,
 } from 'rxjs';
-import { MovieService } from './movie.service';
+import { MovieService } from '../movie.service';
 
 @Component({
-  selector: 'app-demo-one',
-  templateUrl: './demo-one.component.html',
-  styleUrls: ['./demo-one.component.scss'],
+  selector: 'single-shot',
+  templateUrl: './single-shot.component.html',
+  styles: [
+    `
+      :host {
+        display: contents;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DemoOneComponent {
+export class SingleShotComponent {
   /** state creation functions **/
 
   /** async start **/

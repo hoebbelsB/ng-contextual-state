@@ -50,6 +50,14 @@
   }
 }
 
+.navbar {
+  a {
+    &.active {
+      text-decoration: underline;
+    }
+  }
+}
+
 .demo-panel {
   display: flex;
   margin-left: .5rem;

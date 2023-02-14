@@ -1,4 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  AfterViewInit,
+} from '@angular/core';
 import { setTimeout } from '@rx-angular/cdk/zone-less/browser';
 import {
   BehaviorSubject,
@@ -9,59 +14,34 @@ import {
   Subject,
   switchMap,
 } from 'rxjs';
-import { Movie } from './movie';
-import { MovieService } from './movie.service';
+import { Movie } from '../movie';
+import { MovieService } from '../movie.service';
 
 @Component({
-  selector: 'app-demo-three',
-  templateUrl: './demo-three.component.html',
-  styleUrls: ['./demo-three.component.scss'],
+  selector: 'context-trigger',
+  templateUrl: './context-trigger.component.html',
+  styles: [
+    `
+      :host {
+        display: contents;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DemoThreeComponent {
+export class ContextTriggerComponent {
   private searchTerm$ = new BehaviorSubject<string>('');
 
-  /** state creation functions **/
-
-  /** async start **/
   createState = () =>
     this.searchTerm$.pipe(
       switchMap(term => this.movieService.searchMovies(term))
     );
 
-  /** async final **/
-  /*createState = () => {
-    // introduce movie cache to not lose data when searching
-    let movieCache: Movie[] = [];
-    return this.searchTerm$.pipe(
-      switchMap(term => {
-        return this.movieService.searchMovies(term).pipe(
-          map(movies => {
-            // cache latest movie values when
-            movieCache = movies;
-            return { movies };
-          }),
-          catchError(e =>
-            of({ loading: false, movies: movieCache, error: true })
-          ),
-          /!** when we start the search, emit loading true + cached movies **!/
-          startWith({ loading: true, movies: movieCache, error: false })
-        );
-      })
-    );
-  };*/
-
-  /** rxlet **/
-  /*createState = () =>
-    this.searchTerm$.pipe(
-      switchMap(term => this.movieService.searchMovies(term))
-    );*/
-
   /** template state **/
   state$ = this.createState();
 
   /** template triggers **/
-  suspenseTrigger$ = new Subject<void>();
+  suspenseTrigger$ = new BehaviorSubject<void>(void 0);
   completeTrigger$ = new Subject<void>();
   errorTrigger$ = new Subject<void>();
   nextTrigger$ = new Subject<void>();

@@ -7,15 +7,6 @@
 <!--      <button class="btn" (click)="stop()">✓ complete</button>-->
     </div>
   </div>
-  <div class="panel-group">
-    <h3>Triggers</h3>
-    <div class="btn-group">
-      <button class="btn" (click)="triggerSuspense()">↻ suspense</button>
-      <button class="btn" (click)="triggerError()">x error</button>
-      <button class="btn" (click)="triggerComplete()">✓ complete</button>
-      <button class="btn" (click)="triggerNext()">next</button>
-    </div>
-  </div>
 </div>
 <h2>Multi Shot with template triggers</h2>
 <div class="search-bar">
@@ -52,14 +43,14 @@
   <div class="complete context">stream completed ✓</div>
 </ng-template>
 
-<!-- stage 3: rxLet final -->
+<!-- stage 4: rxLet with all triggers -->
 <!--<div
   class="movie-list"
   *rxLet="
     state$;
     let state;
-    let c = $complete;
-    let s = $suspense;
+    let c = complete;
+    let s = suspense;
     error: error;
     nextTrg: nextTrigger$;
     completeTrg: completeTrigger$;
@@ -74,31 +65,52 @@
   <movie-card *ngFor="let movie of state" [movie]="movie"> </movie-card>
 </div>-->
 
-<!-- stage 3: async final -->
-<!--<div class="movie-list"-->
-<!--     *ngIf="state$ | async as state">-->
-
-<!--  <ng-container-->
-<!--    *ngIf="state.loading; then: loader"></ng-container>-->
-<!--  <ng-container-->
-<!--    *ngIf="state.error; then: error"></ng-container>-->
-
-<!--  <movie-card-->
-<!--    *ngFor="let movie of state.movies"-->
-<!--    [movie]="movie"-->
-<!--  >-->
-<!--  </movie-card>-->
-
-<!--</div>-->
-
-<!-- async start -->
-<div
+<!-- stage 3: rxLet final -->
+<!--<div
   class="movie-list"
-  *ngIf="
-    state$ | async as state;
-    else: loader
+  *rxLet="
+    state$;
+    let state;
+    let c = complete;
+    let s = suspense;
+    error: error;
+    suspenseTrigger: suspenseTrigger$;
   "
 >
-  <movie-card *ngFor="let movie of state" [movie]="movie">
+
+  <ng-container *ngIf="c; then: complete"></ng-container>
+  <ng-container *ngIf="s; then: loader"></ng-container>
+
+  <movie-card *ngFor="let movie of state" [movie]="movie"> </movie-card>
+</div>-->
+
+<!-- stage 3: async final -->
+<!--<div class="movie-list"
+     *ngIf="state$ | async as state">
+
+  <ng-container
+    *ngIf="state.loading; then: loader"></ng-container>
+  <ng-container
+    *ngIf="state.error; then: error"></ng-container>
+
+  <movie-card
+    *ngFor="let movie of state.movies"
+    [movie]="movie"
+  >
   </movie-card>
+
+</div>-->
+
+<!-- async start -->
+<div class="movie-list"
+     *ngIf="state$ | async as state; else: loader">
+
+  <ng-container *ngIf="state.error; then: error"></ng-container>
+
+  <movie-card
+    *ngFor="let movie of state.movies"
+    [movie]="movie"
+  >
+  </movie-card>
+
 </div>
