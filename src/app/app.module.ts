@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { provideRouter, RouterModule } from '@angular/router';
 import { LetModule } from '@rx-angular/template/let';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 import { AppComponent } from './app.component';
 import { ContextTriggerComponent } from './demos/context-trigger.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
+import { MovieListSkeletonComponent } from './movie-list-skeleton/movie-list-skeleton.component';
 import { StarRatingModule } from './star-rating/star-rating.module';
 import { SingleShotComponent } from './demos/single-shot.component';
 import { StreamComponent } from './demos/stream.component';
@@ -19,8 +21,15 @@ import { SearchComponent } from './demos/search.component';
     StreamComponent,
     SearchComponent,
     ContextTriggerComponent,
+    MovieListSkeletonComponent,
   ],
-  imports: [BrowserModule, StarRatingModule, LetModule, RouterModule],
+  imports: [
+    BrowserModule,
+    StarRatingModule,
+    LetModule,
+    RouterModule,
+    NgxSkeletonLoaderModule,
+  ],
   providers: [
     provideRouter([
       {

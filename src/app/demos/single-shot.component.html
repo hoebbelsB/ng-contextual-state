@@ -19,7 +19,7 @@
 
 <!-- suspense template -->
 <ng-template #loader>
-  <div class="loader"></div>
+  <movie-list-skeleton [amount]="4"></movie-list-skeleton>
 </ng-template>
 
 
@@ -53,6 +53,7 @@
 
 <!-- start -->
 <div class="movie-list">
+
   <movie-card
     *ngFor="let movie of state$ | async"
     [movie]="movie"
