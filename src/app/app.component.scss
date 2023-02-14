@@ -130,9 +130,9 @@
 
 .movie-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10rem, 300px));
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 200px));
   gap: 4rem 2rem;
-  place-content: space-between space-evenly;
+  place-content: start space-evenly;
   align-items: start;
   margin-top: 100px;
   position: relative;
@@ -144,13 +144,7 @@
   }
 
   @media only screen and (max-width: 600px) {
-    grid-template-columns: repeat(auto-fit, minmax(10rem, 23rem));
-    justify-content: space-around;
-    gap: 4rem 1.5rem;
-  }
-
-  @media only screen and (max-width: 500px) {
-    grid-template-columns: repeat(auto-fit, minmax(10rem, 18rem));
-    gap: 4rem 1rem;
+    grid-template-columns: min-content;
+    gap: .5rem;
   }
 }
