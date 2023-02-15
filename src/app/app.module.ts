@@ -9,7 +9,7 @@ import { ContextTriggerComponent } from './demos/context-trigger.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
 import { MovieListSkeletonComponent } from './movie-list-skeleton/movie-list-skeleton.component';
 import { StarRatingModule } from './star-rating/star-rating.module';
-import { SingleShotComponent } from './demos/single-shot.component';
+import { SimpleLoaderComponent } from './demos/simple-loader.component';
 import { StreamComponent } from './demos/stream.component';
 import { SearchComponent } from './demos/search.component';
 
@@ -17,7 +17,7 @@ import { SearchComponent } from './demos/search.component';
   declarations: [
     AppComponent,
     MovieCardComponent,
-    SingleShotComponent,
+    SimpleLoaderComponent,
     StreamComponent,
     SearchComponent,
     ContextTriggerComponent,
@@ -33,8 +33,8 @@ import { SearchComponent } from './demos/search.component';
   providers: [
     provideRouter([
       {
-        path: 'single-shot',
-        component: SingleShotComponent,
+        path: 'simple-loader',
+        component: SimpleLoaderComponent,
       },
       {
         path: 'stream',
@@ -50,7 +50,7 @@ import { SearchComponent } from './demos/search.component';
       },
       {
         path: '**',
-        redirectTo: 'single-shot',
+        redirectTo: 'simple-loader',
       },
     ]),
   ],

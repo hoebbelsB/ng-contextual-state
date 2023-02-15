@@ -12,8 +12,8 @@ import {
 import { MovieService } from '../movie.service';
 
 @Component({
-  selector: 'single-shot',
-  templateUrl: './single-shot.component.html',
+  selector: 'simple-loader',
+  templateUrl: './simple-loader.component.html',
   styles: [
     `
       :host {
@@ -23,7 +23,7 @@ import { MovieService } from '../movie.service';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SingleShotComponent {
+export class SimpleLoaderComponent {
   /** state creation functions **/
 
   /** async start **/
